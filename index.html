@@ -52,6 +52,7 @@ $("#stop-button").click(function() {
     }
     else {
         $(this).html(`<span class="stop">✖</span>`);
+		throttle = document.getElementById("throttle").value;
         miner(100-parseInt(throttle));
     }
     isGo=!isGo;
