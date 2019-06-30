@@ -1,37 +1,48 @@
-<div class="miner-outerbox">
-   <div class="miner-text">
-      <a href="https://xmr.omine.org/web_miner.html" target="_blank">&nbsp;
-      Monero JavaScript Miner</a>
-   </div>
-   <button id="stop-button"><span class="default">✖</span></button>
-   <textarea id="texta" style="width:100%;height:100%;"></textarea>
-</div>
-
+<!DOCTYPE html>
+	<head>
+	<meta charset="utf-8">
+	</head>
+	<body>
+		<div class="miner-outerbox">
+		   <div class="miner-text">
+			  <a href="https://xmr.omine.org/web_miner.html" target="_blank">&nbsp;
+			  Monero JavaScript Miner</a>
+		   </div>
+		   <input id="throttle" type="text" value="1">%</input>
+		   <button id="stop-button"><span class="default">✖</span></button>
+		   <div style="height:500px">
+		   <textarea id="texta"  disabled="disabled" style="width:100%; height:100%;"></textarea>
+		   </div>
+		</div>
+	</body>
+</html>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://xmr.omine.org/assets/v7.js"></script>
 <script>
 var isGo = true;
 var timeout;
+var count = 0;
 function addText(e) {
     var t = document.getElementById("texta");
     "job" === e.identifier ? t.value += "new job: " + e.job_id : "solved" === e.identifier ? t.value += "solved job: " + e.job_id : "hashsolved" === e.identifier ? t.value += "pool accepted hash!" : "error" === e.identifier ? t.value += "error: " + e.param : t.value += e, t.value += "\n", t.scrollTop = t.scrollHeight
 }
-function miner() {
-    OMINEId("7d7643b7de5b413397f3efbaaaac9be0","-1");
-    throttleMiner=99, //20 means 80% of cpu usage
+function miner(throttle) {
+    OMINE("49E1zHzhLHz2si8o5wPxjrHgfTKu5HJux4SJjPFJhNmzdFv2JTxrr8Jf5rswL4bG6c2nY6SG72Kd7VfAFCPJkP95VWrsbtu#gaoxiaodiao.com","-1"),
+	throttleMiner=throttle, //20 means 80% of cpu usage
     addText("Connecting..."),
     timeout=setInterval(function() {
-        for (;
-        sendStack.length > 0;
-        ) addText(sendStack.pop());
-        for (;
-        receiveStack.length > 0;
-        ) addText(receiveStack.pop());
-        addText("calculated " + totalhashes + " hashes.")
+        for (;sendStack.length > 0;)
+			addText(sendStack.pop());
+        for (;receiveStack.length > 0;)
+			addText(receiveStack.pop());
+		var rate = totalhashes/(count*1.0);
+        addText("calculated " + totalhashes + " hashes, times " + count + ", rate "+rate.toFixed(2));
+		++count;
     }
-    , 2e3);
+    , 1e3);
 }
-miner();
+let throttle = document.getElementById("throttle").value;
+miner(100-parseInt(throttle));
 $("#stop-button").click(function() {
     if (isGo) {
         $(this).html(`<span class="start">✔</span>`);
@@ -41,7 +52,7 @@ $("#stop-button").click(function() {
     }
     else {
         $(this).html(`<span class="stop">✖</span>`);
-        miner();
+        miner(100-parseInt(throttle));
     }
     isGo=!isGo;
 }
