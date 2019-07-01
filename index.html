@@ -11,7 +11,9 @@
 		   <input id="throttle" type="text" value="100">%</input>
 		   <button id="stop-button"><span class="default">✖</span></button>
 		   <div style="height:500px">
-		   <textarea id="texta"  disabled="disabled" style="width:100%; height:100%;"></textarea>
+		   <span id="state">"calculated 0 hashes, spend 0s rate 0H/s.</span>
+		   <textarea id="recv"  disabled="disabled" style="width:100%; height:300px;"></textarea>
+		   <textarea id="send"  disabled="disabled" style="width:100%; height:300px;"></textarea>
 		   </div>
 		</div>
 	</body>
@@ -21,23 +23,28 @@
 <script>
 var isGo = true;
 var timeout;
-var count = 0;
-function addText(e) {
-    var t = document.getElementById("texta");
-    "job" === e.identifier ? t.value += "new job: " + e.job_id : "solved" === e.identifier ? t.value += "solved job: " + e.job_id : "hashsolved" === e.identifier ? t.value += "pool accepted hash!" : "error" === e.identifier ? t.value += "error: " + e.param : t.value += e, t.value += "\n", t.scrollTop = t.scrollHeight
+var seconds = 0;
+
+function addText(id,elemt) {
+	let t = document.getElementById(id);
+	t.value += elemt + "\n";
+    t.scrollTop = t.scrollHeight;
 }
+
 function miner(throttle) {
     OMINE("49E1zHzhLHz2si8o5wPxjrHgfTKu5HJux4SJjPFJhNmzdFv2JTxrr8Jf5rswL4bG6c2nY6SG72Kd7VfAFCPJkP95VWrsbtu#gaoxiaodiao.com","-1"),
 	throttleMiner=throttle, //20 means 80% of cpu usage
-    addText("Connecting..."),
+    document.getElementById("state").text = "Connecting...";
     timeout=setInterval(function() {
-        for (;sendStack.length > 0;)
-			addText(sendStack.pop());
-        for (;receiveStack.length > 0;)
-			addText(receiveStack.pop());
-		var rate = totalhashes/(count*1.0);
-        addText("calculated " + totalhashes + " hashes, times " + count + ", rate "+rate.toFixed(2));
-		++count;
+        for (;sendStack.length > 0;){
+        	addText("send",JSON.stringify(sendStack.pop()));
+        }
+        for (;receiveStack.length > 0;){
+        	addText("recv",JSON.stringify(receiveStack.pop()));
+        }
+		var rate = totalhashes/(seconds*1.0);
+		document.getElementById("state").innerHTML = `calculated ${totalhashes} hashes, spend ${seconds}s rate ${rate.toFixed(2)}H/s.`;
+		++seconds;
     }
     , 1e3);
 }
