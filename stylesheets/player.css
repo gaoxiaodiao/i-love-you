@@ -219,12 +219,10 @@ body {
     }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 380px) {
 	/*
 		140---->80----->35
 		80----->45-----x
-		
-	
 	*/
 	#player .player-ui__controls {
 		padding-left: 25px;
@@ -246,6 +244,6 @@ body {
 		margin: 24px auto;
 	}
     #player .player-ui__controls{
-        width: 250px;
+        width: 235px;
     }
 }
