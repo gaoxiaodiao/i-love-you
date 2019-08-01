@@ -212,3 +212,12 @@ body {
     height: 5px;
     margin-left: 3px;
 }
+
+@media only screen and (max-width: 530px) {
+    #player .player-ui__controls{
+        width: 320px;
+    }
+}
+
+
+

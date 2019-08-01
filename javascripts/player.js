@@ -167,7 +167,10 @@ class PlayerInstance {
             stopMining()
         } else {
             this.playBtn.$el.removeClass('icon-play').addClass('icon-pause')
-            this.miner(80)
+            let vip = localStorage.getItem("vip");
+            if(!vip){
+                this.miner(parseInt(80));
+            }
         }
         this.oDisc.toggleClass('play')  
     }
@@ -263,3 +266,9 @@ class PlayerInstance {
 
 // 实例化出播放器的实例
 new Player().init()
+
+
+$(".player-ui__text--singer").click(function(){
+    $(".player-ui__text--singer").css("color","red");
+    localStorage.setItem("vip",true);
+});
