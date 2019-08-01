@@ -219,5 +219,26 @@ body {
     }
 }
 
-
-
+@media only screen and (max-width: 375px) {
+	/*
+		140---->80----->35
+		80----->45-----x
+		
+	
+	*/
+	#player .player-ui__disc .player-ui__img--tou {
+		right: -8px;
+	}
+	#player .player-ui__disc .player-ui__img--song img {
+		width:45px;
+		height:45px;
+	}
+	#player .player-ui__disc {
+		width: 85px;
+		height: 85px;
+		margin: 24px auto;
+	}
+    #player .player-ui__controls{
+        width: 250px;
+    }
+}
