@@ -226,6 +226,12 @@ body {
 		
 	
 	*/
+	#player .player-ui__controls {
+		padding-left: 25px;
+	}
+	.player-ui__volume-wrapper {
+		width: 100px;
+	}
 	#player .player-ui__disc .player-ui__img--tou {
 		right: -8px;
 	}
