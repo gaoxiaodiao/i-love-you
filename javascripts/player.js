@@ -193,14 +193,15 @@ class PlayerInstance {
     //  index 切换的指定的歌曲   
     changeSongHandler (param) { 
         // 0. 存储换歌前的播放状态 1. 更改歌曲的索引 2. 重新渲染歌曲 3. 根据换歌前是否播放控制当前是否播放
-        let isPause = this.el.paused
+        //let isPause = this.el.paused
         if ( typeof param === 'number' ) {
             this.songIndex = param
         } else {
             this.changeIndexDependLoop(param)
         }
         this.renderSongHandler()
-        if ( !isPause ) this.el.play()
+        //this.el.play()
+        this.playAndPauseHandler()
     }
     
 
