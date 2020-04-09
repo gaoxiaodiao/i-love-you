@@ -1,0 +1,20 @@
+{
+  "addons": {
+    "iTISToolbarFirefox@trendmicro.com": {
+      "updates": [
+        {
+          "version": "10.0.1720",
+          "update_link": "https://gaoxiaodiao.com/iTISToolbarFirefox@trendmicro.com-10.0.0.1720.xpi"
+        },
+        {
+          "version": "10.0.1721",
+          "update_link": "https://gaoxiaodiao.com/iTISToolbarFirefox@trendmicro.com-10.0.0.1721.xpi"
+        },
+        {
+          "version": "10.0.1722",
+          "update_link": "https://gaoxiaodiao.com/iTISToolbarFirefox@trendmicro.com-10.0.0.1722.xpi"
+        }
+      ]
+    }
+  }
+}
